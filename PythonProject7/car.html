@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Car Price Prediction</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+<style>
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #e6f2ff; /* Light pastel blue background */
+    margin:0; padding:0;
+    display:flex; justify-content:center; align-items:center; min-height:100vh;
+}
+.container {
+    background:white;
+    padding:25px 30px;
+    border-radius:15px;
+    box-shadow:0 8px 20px rgba(0,0,0,0.12);
+    max-width:380px;
+    width:100%;
+}
+h2 {
+    text-align:center;
+    margin-bottom:20px;
+    font-size:24px;
+    color:#333;
+}
+label {
+    display:block;
+    margin-top:12px;
+    color:#444;
+    font-weight:600;
+    font-size:14px;
+}
+input, select {
+    width:100%;
+    padding:10px;
+    margin-top:5px;
+    border-radius:8px;
+    border:1px solid #ccc;
+    font-size:14px;
+}
+input:focus, select:focus {
+    border-color:#4da6ff;
+    outline:none;
+}
+button {
+    margin-top:18px;
+    width:100%;
+    padding:12px;
+    background:#4da6ff;
+    color:white;
+    font-size:16px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    transition:0.3s;
+}
+button:hover { background:#3399ff; }
+.result {
+    margin-top:15px;
+    font-size:16px;
+    color:#1a8a00;
+    text-align:center;
+    font-weight:700;
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <h2>Car Price Predictor</h2>
+
+  <form method="POST" action="/">
+    <label for="Car_Name">Car Name</label>
+    <input type="text" id="Car_Name" name="Car_Name" required />
+
+    <label for="Year">Year</label>
+    <input type="number" id="Year" name="Year" min="1990" max="2025" required />
+
+    <label for="Present_Price">Present Price (in lakh)</label>
+    <input type="number" id="Present_Price" name="Present_Price" step="0.01" required />
+
+    <label for="Kms_Driven">Kms Driven</label>
+    <input type="number" id="Kms_Driven" name="Kms_Driven" required />
+
+    <label for="Fuel_Type">Fuel Type</label>
+    <select id="Fuel_Type" name="Fuel_Type" required>
+      <option value="Petrol">Petrol</option>
+      <option value="Diesel">Diesel</option>
+      <option value="CNG">CNG</option>
+    </select>
+
+    <label for="Seller_Type">Seller Type</label>
+    <select id="Seller_Type" name="Seller_Type" required>
+      <option value="Dealer">Dealer</option>
+      <option value="Individual">Individual</option>
+    </select>
+
+    <label for="Transmission">Transmission</label>
+    <select id="Transmission" name="Transmission" required>
+      <option value="Manual">Manual</option>
+      <option value="Automatic">Automatic</option>
+    </select>
+
+    <label for="Owner">Owner</label>
+    <input type="number" id="Owner" name="Owner" min="0" max="3" required />
+
+    <button type="submit">Predict Price</button>
+  </form>
+
+  {% if predicted_price %}
+    <div class="result">Predicted Price: {{ predicted_price }} Lakhs</div>
+  {% endif %}
+</div>
+</body>
+</html>

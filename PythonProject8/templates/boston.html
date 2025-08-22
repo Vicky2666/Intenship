@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Boston House Price Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: #f9f9f9;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            max-width: 700px;
+            margin: auto;
+        }
+        .input-group {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .input-group label {
+            flex: 1;
+            margin-right: 10px;
+            font-weight: bold;
+            color: #444;
+        }
+        .input-group input {
+            flex: 2;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            text-align: center;
+            margin: 20px;
+            font-size: 18px;
+            color: #222;
+        }
+        .plots {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        .plots img {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            width: 500px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Boston House Price Prediction</h1>
+
+<form method="POST">
+    {% for feat in features %}
+    <div class="input-group">
+        <label for="{{ feat }}">{{ feat }}</label>
+        <input type="text" name="{{ feat }}" id="{{ feat }}" required>
+    </div>
+    {% endfor %}
+    <button type="submit">Predict</button>
+</form>
+
+{% if predicted_price %}
+<div class="result">
+    <h2>Predicted Price: <span style="color:darkblue;">{{ predicted_price }} Lakhs</span></h2>
+</div>
+{% endif %}
+
+{% if coeff_plot or pred_plot %}
+<div class="plots">
+    {% if coeff_plot %}
+    <div>
+        <h3>Coefficients of Features</h3>
+        <img src="data:image/png;base64,{{ coeff_plot }}" alt="Coefficient Plot">
+    </div>
+    {% endif %}
+
+    {% if pred_plot %}
+    <div>
+        <h3>Actual vs Predicted Prices</h3>
+        <img src="data:image/png;base64,{{ pred_plot }}" alt="Prediction Plot">
+    </div>
+    {% endif %}
+</div>
+{% endif %}
+
+</body>
+</html>
