@@ -1,0 +1,7 @@
+text,Top K Predictions,output,flag,username,timestamp
+"Symptoms of diabetes include polyuria and [MASK].
+",5,"fatigue (0.1445)
+confusion (0.1074)
+anxiety (0.0948)
+nausea (0.0744)
+depression (0.0605)",,,2025-08-23 11:04:58.084113
